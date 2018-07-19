@@ -2,7 +2,7 @@
 #include "Graphics.h"
 #include <assert.h>
 
-void Poo::Init( int in_x,int in_y,int in_vx,int in_vy )
+void Poo::Init( int in_x,int in_y,float in_vx,float in_vy )
 {
 	assert( initialized == false );
 	x = in_x;
