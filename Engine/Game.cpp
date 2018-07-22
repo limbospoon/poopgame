@@ -33,7 +33,7 @@ Game::Game( MainWindow& wnd )
 	goal( xDist( rng ),yDist( rng ) ),
 	meter( 20,20 )
 {
-	std::uniform_real_distribution<float> vDist( -2.5f,2.5f );
+	std::uniform_real_distribution<float> vDist( -2.5f * 60.0f,2.5f * 60.0f );
 	for( int i = 0; i < nPoo; ++i )
 	{
 		poos[i].Init( xDist( rng ),yDist( rng ),vDist( rng ),vDist( rng ) );
@@ -52,16 +52,15 @@ void Game::Go()
 void Game::UpdateModel()
 {
 	const float dt = ft.Mark();
-	/*Poo Game Update
 	goal.UpdateColor();
 	if( isStarted && !isGameOver )
 	{
-		dude.Update( wnd.kbd );
+		dude.Update( wnd.kbd, dt );
 		dude.ClampToScreen();
 
 		for( int i = 0; i < nPoo; ++i )
 		{
-			poos[i].Update();
+			poos[i].Update(dt);
 			if( poos[i].TestCollision( dude ) )
 			{
 				isGameOver = true;
@@ -82,28 +81,14 @@ void Game::UpdateModel()
 		{
 			isStarted = true;
 		}
-	}*/
+	}
 }
 
 
 
 void Game::ComposeFrame()
 {
-	using std::chrono::steady_clock;
-	auto start = steady_clock::now();
-	for (int y = 0; y < Graphics::ScreenHeight; y++)
-	{
-		for (int x = 0; x < Graphics::ScreenWidth; x++)
-		{
-			gfx.PutPixel(x, y, Colors::Green);
-		}
-	}
-	auto end = steady_clock::now();
-
-	std::chrono::duration<float> runtime = end - start;
-	float durationSeconds = runtime.count();
-
-	/*if( !isStarted )
+	if( !isStarted )
 	{
 		DrawTitleScreen( 325,211 );
 	}
@@ -120,7 +105,7 @@ void Game::ComposeFrame()
 			DrawGameOver( 358,268 );
 		}
 		meter.Draw( gfx );
-	}*/
+	}
 }
 
 void Game::DrawGameOver(int x, int y)
