@@ -18,3 +18,13 @@ Vec2& Vec2::operator+=(const Vec2 & rhs)
 	*this = *this + rhs;
 	return *this;
 }
+
+Vec2 Vec2::operator*(float rhs) const
+{
+	return Vec2(x * rhs, y * rhs);
+}
+
+Vec2& Vec2::operator*=(float rhs)
+{
+	return *this = *this * rhs;
+}
